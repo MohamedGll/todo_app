@@ -24,7 +24,6 @@ class _HomeViewState extends State<HomeView> {
       extendBody: true,
       backgroundColor: AppColors.secondary,
       appBar: AppBar(
-        toolbarHeight: 100,
         backgroundColor: AppColors.primary,
         title: const Text(
           'To Do List',
