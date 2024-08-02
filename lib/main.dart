@@ -12,8 +12,11 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+      ),
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashView.id,
+      initialRoute: HomeView.id,
       routes: {
         HomeView.id: (context) => const HomeView(),
         SplashView.id: (context) => const SplashView(),

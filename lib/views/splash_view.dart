@@ -19,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
         seconds: 3,
       ),
       () {
-        Navigator.pushNamed(context, HomeView.id);
+        Navigator.pushReplacementNamed(context, HomeView.id);
       },
     );
   }
