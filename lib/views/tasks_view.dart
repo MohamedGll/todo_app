@@ -1,6 +1,7 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/widgets/task_item.dart';
 
 class TasksView extends StatelessWidget {
   const TasksView({super.key});
@@ -34,7 +35,22 @@ class TasksView extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        Expanded(
+          child: ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 22,
+            ),
+            itemBuilder: (context, index) {
+              return const TaskItem();
+            },
+            itemCount: 10,
+          ),
+        ),
       ],
     );
   }
