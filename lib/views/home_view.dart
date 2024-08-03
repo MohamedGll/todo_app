@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/views/settings_view.dart';
 import 'package:todo_app/views/tasks_view.dart';
@@ -19,6 +18,10 @@ class _HomeViewState extends State<HomeView> {
     const TasksView(),
     const SettingsView(),
   ];
+  List<String> labels = [
+    'To Do List',
+    'Settings',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +29,11 @@ class _HomeViewState extends State<HomeView> {
       extendBody: true,
       backgroundColor: AppColors.secondary,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: AppColors.primary,
-        title: const Text(
-          'To Do List',
-          style: TextStyle(
+        title: Text(
+          labels[selectedIndex],
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 22,
             fontWeight: FontWeight.w700,
