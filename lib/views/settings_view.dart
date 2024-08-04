@@ -18,8 +18,8 @@ class _SettingsViewState extends State<SettingsView> {
     'Light',
     'Dark',
   ];
-  String? selectedLang;
-  String? selectedMode;
+  String selectedLang = 'English';
+  String selectedMode = 'Light';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -65,7 +65,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  'Select Language',
+                  selectedLang,
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,
@@ -90,7 +90,7 @@ class _SettingsViewState extends State<SettingsView> {
                 value: selectedLang,
                 onChanged: (String? value) {
                   setState(() {
-                    selectedLang = value;
+                    selectedLang = value!;
                   });
                 },
                 buttonStyleData: const ButtonStyleData(
@@ -140,7 +140,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  'Select Mode',
+                  selectedMode,
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,
@@ -165,7 +165,7 @@ class _SettingsViewState extends State<SettingsView> {
                 value: selectedMode,
                 onChanged: (String? value) {
                   setState(() {
-                    selectedMode = value;
+                    selectedMode = value!;
                   });
                 },
                 buttonStyleData: const ButtonStyleData(

@@ -27,28 +27,20 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      backgroundColor: AppColors.secondary,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppColors.primary,
         title: Text(
           labels[selectedIndex],
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-          ),
         ),
       ),
       body: views.elementAt(selectedIndex),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
+        // color: Colors.white,
         notchMargin: 6,
-        padding: EdgeInsets.zero,
-        shape: const CircularNotchedRectangle(),
+        // padding: EdgeInsets.zero,
+        // shape: const CircularNotchedRectangle(),
         child: BottomNavigationBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
+          // backgroundColor: Colors.transparent,
+          // elevation: 0,
           selectedItemColor: AppColors.primary,
           unselectedItemColor: AppColors.grey,
           currentIndex: selectedIndex,
@@ -88,14 +80,6 @@ class _HomeViewState extends State<HomeView> {
             },
           );
         },
-        backgroundColor: AppColors.primary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(42),
-          side: const BorderSide(
-            color: Colors.white,
-            width: 2,
-          ),
-        ),
         child: const Icon(
           Icons.add,
           color: Colors.white,

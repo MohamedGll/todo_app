@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/splash_view.dart';
 
@@ -12,9 +13,8 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Poppins',
-      ),
+      themeMode: ThemeMode.dark,
+      theme: MyThemeData.darkTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: HomeView.id,
       routes: {
