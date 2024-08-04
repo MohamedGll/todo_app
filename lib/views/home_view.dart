@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/views/settings_view.dart';
 import 'package:todo_app/views/tasks_view.dart';
 import 'package:todo_app/widgets/add_task_bottom_sheet.dart';
@@ -16,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
   int selectedIndex = 0;
   List<Widget> views = [
     const TasksView(),
-    const SettingsView(),
+    SettingsView(),
   ];
   List<String> labels = [
     'To Do List',
@@ -25,6 +27,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -67,6 +70,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 1,
         onPressed: () {
           showModalBottomSheet(
             isScrollControlled: true,
@@ -80,6 +84,15 @@ class _HomeViewState extends State<HomeView> {
             },
           );
         },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(42),
+          side: BorderSide(
+            color: themeProvider.appTheme == ThemeMode.dark
+                ? AppColors.primaryDark
+                : Colors.white,
+            width: 3,
+          ),
+        ),
         child: const Icon(
           Icons.add,
           color: Colors.white,

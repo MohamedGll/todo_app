@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Slidable(
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
@@ -36,7 +39,9 @@ class TaskItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 24),
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: themeProvider.appTheme == ThemeMode.dark
+              ? AppColors.primaryDark
+              : Colors.white,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(
@@ -67,12 +72,14 @@ class TaskItem extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                const Text(
+                Text(
                   '10:30 AM',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black,
+                    color: themeProvider.appTheme == ThemeMode.dark
+                        ? Colors.white
+                        : Colors.black,
                   ),
                 ),
               ],

@@ -1,15 +1,12 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 
-class SettingsView extends StatefulWidget {
-  const SettingsView({super.key});
+class SettingsView extends StatelessWidget {
+  SettingsView({super.key});
 
-  @override
-  State<SettingsView> createState() => _SettingsViewState();
-}
-
-class _SettingsViewState extends State<SettingsView> {
   final List<String> langs = [
     'English',
     'Arabic',
@@ -22,6 +19,7 @@ class _SettingsViewState extends State<SettingsView> {
   String selectedMode = 'Light';
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -33,13 +31,16 @@ class _SettingsViewState extends State<SettingsView> {
         const SizedBox(
           height: 32,
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 22),
+        Padding(
+          padding: const EdgeInsets.only(left: 22),
           child: Text(
             'Language',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
           ),
         ),
@@ -51,7 +52,9 @@ class _SettingsViewState extends State<SettingsView> {
           child: Container(
             height: 55,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? AppColors.primaryDark
+                  : Colors.white,
               border: Border.all(
                 color: AppColors.primary,
                 width: 2,
@@ -89,9 +92,7 @@ class _SettingsViewState extends State<SettingsView> {
                     .toList(),
                 value: selectedLang,
                 onChanged: (String? value) {
-                  setState(() {
-                    selectedLang = value!;
-                  });
+                  selectedLang = value!;
                 },
                 buttonStyleData: const ButtonStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 16),
@@ -108,13 +109,16 @@ class _SettingsViewState extends State<SettingsView> {
         const SizedBox(
           height: 32,
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 22),
+        Padding(
+          padding: const EdgeInsets.only(left: 22),
           child: Text(
             'Mode',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
           ),
         ),
@@ -126,7 +130,9 @@ class _SettingsViewState extends State<SettingsView> {
           child: Container(
             height: 55,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? AppColors.primaryDark
+                  : Colors.white,
               border: Border.all(
                 color: AppColors.primary,
                 width: 2,
@@ -164,9 +170,10 @@ class _SettingsViewState extends State<SettingsView> {
                     .toList(),
                 value: selectedMode,
                 onChanged: (String? value) {
-                  setState(() {
-                    selectedMode = value!;
-                  });
+                  selectedMode = value!;
+                  value == 'Light'
+                      ? themeProvider.changeTheme(ThemeMode.light)
+                      : themeProvider.changeTheme(ThemeMode.dark);
                 },
                 buttonStyleData: const ButtonStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 16),

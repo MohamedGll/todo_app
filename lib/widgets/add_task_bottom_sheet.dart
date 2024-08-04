@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   const AddTaskBottomSheet({super.key});
@@ -13,6 +15,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 28),
       child: Column(
@@ -22,11 +25,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           const SizedBox(
             height: 18,
           ),
-          const Text(
+          Text(
             'Add new Task',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.black,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),
@@ -52,6 +57,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 ),
               ),
               hintText: 'Title',
+              hintStyle: TextStyle(
+                color: themeProvider.appTheme == ThemeMode.dark
+                    ? AppColors.grey
+                    : Colors.black,
+              ),
             ),
           ),
           const SizedBox(
@@ -75,16 +85,23 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 ),
               ),
               hintText: 'Description',
+              hintStyle: TextStyle(
+                color: themeProvider.appTheme == ThemeMode.dark
+                    ? AppColors.grey
+                    : Colors.black,
+              ),
             ),
           ),
           const SizedBox(
             height: 32,
           ),
-          const Text(
+          Text(
             'Select Time',
             textAlign: TextAlign.start,
             style: TextStyle(
-              color: Colors.black,
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? AppColors.grey
+                  : Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.w400,
             ),

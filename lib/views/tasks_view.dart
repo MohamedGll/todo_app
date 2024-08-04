@@ -1,6 +1,8 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/widgets/task_item.dart';
 
 class TasksView extends StatelessWidget {
@@ -8,6 +10,7 @@ class TasksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
     return Column(
       children: [
         Stack(
@@ -25,11 +28,20 @@ class TasksView extends StatelessWidget {
                 lastDate: DateTime.now().add(const Duration(days: 365)),
                 onDateSelected: (date) => print(date),
                 leftMargin: 20,
-                monthColor: Colors.black,
-                dayColor: Colors.black,
+                monthColor: themeProvider.appTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Colors.black,
+                dayColor: themeProvider.appTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Colors.black,
                 activeDayColor: AppColors.primary,
-                activeBackgroundDayColor: Colors.white,
-                dotColor: Colors.black,
+                activeBackgroundDayColor:
+                    themeProvider.appTheme == ThemeMode.dark
+                        ? AppColors.primaryDark
+                        : Colors.white,
+                dotColor: themeProvider.appTheme == ThemeMode.dark
+                    ? Colors.white
+                    : Colors.black,
                 selectableDayPredicate: (date) => date.day != 23,
                 locale: 'ar',
               ),

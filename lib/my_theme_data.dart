@@ -30,13 +30,6 @@ class MyThemeData {
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(42),
-        side: const BorderSide(
-          color: Colors.white,
-          width: 2,
-        ),
-      ),
     ),
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.white,
