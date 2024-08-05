@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/providers/theme_provider.dart';
+import 'package:todo_app/views/edit_view.dart';
 import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/splash_view.dart';
 
@@ -29,6 +30,7 @@ class TodoApp extends StatelessWidget {
       routes: {
         HomeView.id: (context) => const HomeView(),
         SplashView.id: (context) => const SplashView(),
+        EditView.id: (context) => const EditView(),
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/providers/theme_provider.dart';
+import 'package:todo_app/widgets/custom_text_form_field.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
   const AddTaskBottomSheet({super.key});
@@ -39,57 +40,33 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           const SizedBox(
             height: 18,
           ),
-          TextFormField(
-            cursorColor: AppColors.primary,
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
-                  width: 2,
-                  color: AppColors.primary,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
-                  width: 2,
-                  color: AppColors.grey,
-                ),
-              ),
-              hintText: 'Title',
-              hintStyle: TextStyle(
-                color: themeProvider.appTheme == ThemeMode.dark
-                    ? AppColors.grey
-                    : Colors.black,
-              ),
+          CustomTextFormField(
+            style: TextStyle(
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
+            ),
+            hintText: 'Title',
+            hintStyle: TextStyle(
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? AppColors.grey
+                  : Colors.black,
             ),
           ),
           const SizedBox(
             height: 18,
           ),
-          TextFormField(
-            cursorColor: AppColors.primary,
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
-                  width: 2,
-                  color: AppColors.primary,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide(
-                  width: 2,
-                  color: AppColors.grey,
-                ),
-              ),
-              hintText: 'Description',
-              hintStyle: TextStyle(
-                color: themeProvider.appTheme == ThemeMode.dark
-                    ? AppColors.grey
-                    : Colors.black,
-              ),
+          CustomTextFormField(
+            style: TextStyle(
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? Colors.white
+                  : Colors.black,
+            ),
+            hintText: 'Description',
+            hintStyle: TextStyle(
+              color: themeProvider.appTheme == ThemeMode.dark
+                  ? AppColors.grey
+                  : Colors.black,
             ),
           ),
           const SizedBox(

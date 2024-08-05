@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
 import 'package:todo_app/providers/theme_provider.dart';
+import 'package:todo_app/views/edit_view.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
@@ -24,7 +25,12 @@ class TaskItem extends StatelessWidget {
             label: 'Delete',
           ),
           SlidableAction(
-            onPressed: (context) {},
+            onPressed: (context) {
+              Navigator.pushNamed(
+                context,
+                EditView.id,
+              );
+            },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             borderRadius: BorderRadius.circular(16),
