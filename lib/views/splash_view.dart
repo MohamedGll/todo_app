@@ -31,8 +31,8 @@ class _SplashViewState extends State<SplashView> {
     var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       backgroundColor: themeProvider.appTheme == ThemeMode.dark
-          ? AppColors.primaryDark
-          : AppColors.primary,
+          ? AppColors.secondaryDark
+          : Colors.white,
       body: Center(
         child: Image.asset(
           'assets/images/logo.png',

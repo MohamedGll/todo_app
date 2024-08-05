@@ -7,11 +7,11 @@ import 'package:todo_app/providers/theme_provider.dart';
 class SettingsView extends StatelessWidget {
   SettingsView({super.key});
 
-  final List<String> langs = [
+  List<String> langs = [
     'English',
     'Arabic',
   ];
-  final List<String> modes = [
+  List<String> modes = [
     'Light',
     'Dark',
   ];
