@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
@@ -26,8 +27,8 @@ class _EditViewState extends State<EditView> {
               ? Colors.black
               : Colors.white,
         ),
-        title: const Text(
-          'To Do List',
+        title: Text(
+          'todo_list'.tr(),
         ),
       ),
       body: Stack(
@@ -62,7 +63,7 @@ class _EditViewState extends State<EditView> {
                           height: 16,
                         ),
                         Text(
-                          'Edit Task',
+                          'edit_task'.tr(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18,
@@ -86,7 +87,7 @@ class _EditViewState extends State<EditView> {
                                 ? AppColors.grey
                                 : Colors.black,
                           ),
-                          hintText: 'Title',
+                          hintText: 'title'.tr(),
                         ),
                         const SizedBox(
                           height: 32,
@@ -102,13 +103,13 @@ class _EditViewState extends State<EditView> {
                                 ? AppColors.grey
                                 : Colors.black,
                           ),
-                          hintText: 'Description',
+                          hintText: 'desc'.tr(),
                         ),
                         const SizedBox(
                           height: 32,
                         ),
                         Text(
-                          'Select Time',
+                          'select_time'.tr(),
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             color: themeProvider.appTheme == ThemeMode.dark
@@ -149,9 +150,9 @@ class _EditViewState extends State<EditView> {
                               ),
                             ),
                             onPressed: () {},
-                            child: const Text(
-                              'Save Changes',
-                              style: TextStyle(
+                            child: Text(
+                              'save_changes'.tr(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,

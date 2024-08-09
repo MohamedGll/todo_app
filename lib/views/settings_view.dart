@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
@@ -8,18 +9,20 @@ class SettingsView extends StatelessWidget {
   SettingsView({super.key});
 
   List<String> langs = [
-    'English',
-    'Arabic',
+    'english'.tr(),
+    'arabic'.tr(),
   ];
   List<String> modes = [
-    'Light',
-    'Dark',
+    'light'.tr(),
+    'dark'.tr(),
   ];
   String selectedLang = 'English';
   String selectedMode = 'Light';
+
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<ThemeProvider>(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -32,9 +35,9 @@ class SettingsView extends StatelessWidget {
           height: 32,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 22),
+          padding: const EdgeInsets.only(left: 22, right: 22),
           child: Text(
-            'Language',
+            'lang'.tr(),
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -68,7 +71,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  selectedLang,
+                  selectedLang.tr(),
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,
@@ -92,7 +95,10 @@ class SettingsView extends StatelessWidget {
                     .toList(),
                 value: selectedLang,
                 onChanged: (String? value) {
-                  selectedLang = value!;
+                  selectedLang = value!.tr();
+                  value == langs[0]
+                      ? context.setLocale(const Locale('en'))
+                      : context.setLocale(const Locale('ar'));
                 },
                 buttonStyleData: const ButtonStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 16),
@@ -110,9 +116,9 @@ class SettingsView extends StatelessWidget {
           height: 32,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 22),
+          padding: const EdgeInsets.only(left: 22, right: 22),
           child: Text(
-            'Mode',
+            'mode'.tr(),
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
@@ -146,7 +152,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  selectedMode,
+                  selectedMode.tr(),
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,
@@ -170,10 +176,10 @@ class SettingsView extends StatelessWidget {
                     .toList(),
                 value: selectedMode,
                 onChanged: (String? value) {
-                  selectedMode = value!;
-                  value == 'Light'
-                      ? themeProvider.changeTheme(ThemeMode.light)
-                      : themeProvider.changeTheme(ThemeMode.dark);
+                  selectedMode = value!.tr();
+                  value == 'dark'.tr()
+                      ? themeProvider.changeTheme(ThemeMode.dark)
+                      : themeProvider.changeTheme(ThemeMode.light);
                 },
                 buttonStyleData: const ButtonStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 16),

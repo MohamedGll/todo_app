@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
@@ -21,8 +22,8 @@ class _HomeViewState extends State<HomeView> {
     SettingsView(),
   ];
   List<String> labels = [
-    'To Do List',
-    'Settings',
+    'todo_list',
+    'settings',
   ];
 
   @override
@@ -32,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
       extendBody: true,
       appBar: AppBar(
         title: Text(
-          labels[selectedIndex],
+          labels[selectedIndex].tr(),
         ),
       ),
       body: views.elementAt(selectedIndex),
@@ -53,18 +54,18 @@ class _HomeViewState extends State<HomeView> {
             selectedIndex = index;
             setState(() {});
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home,
               ),
-              label: 'Home',
+              label: 'tasks'.tr(),
             ),
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.settings,
               ),
-              label: 'Settings',
+              label: 'settings'.tr(),
             ),
           ],
         ),

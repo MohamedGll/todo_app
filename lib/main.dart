@@ -1,17 +1,31 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/views/edit_view.dart';
 import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/splash_view.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
-      child: TodoApp(),
+      child: EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        path: 'assets/translations',
+        startLocale: const Locale('en'),
+        saveLocale: true,
+        child: TodoApp(),
+      ),
     ),
   );
 }
@@ -24,6 +38,9 @@ class TodoApp extends StatelessWidget {
     themeProvider = Provider.of<ThemeProvider>(context);
     getTheme();
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       themeMode: themeProvider.appTheme,
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,

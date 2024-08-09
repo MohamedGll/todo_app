@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
@@ -27,7 +28,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             height: 18,
           ),
           Text(
-            'Add new Task',
+            'add_task'.tr(),
             textAlign: TextAlign.center,
             style: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
@@ -46,7 +47,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   ? Colors.white
                   : Colors.black,
             ),
-            hintText: 'Title',
+            hintText: 'title'.tr(),
             hintStyle: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? AppColors.grey
@@ -62,7 +63,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   ? Colors.white
                   : Colors.black,
             ),
-            hintText: 'Description',
+            hintText: 'desc'.tr(),
             hintStyle: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? AppColors.grey
@@ -73,7 +74,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             height: 32,
           ),
           Text(
-            'Select Time',
+            'select_time'.tr(),
             textAlign: TextAlign.start,
             style: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
@@ -105,9 +106,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               backgroundColor: AppColors.primary,
             ),
             onPressed: () {},
-            child: const Text(
-              'Add',
-              style: TextStyle(
+            child: Text(
+              'add'.tr(),
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.w400,

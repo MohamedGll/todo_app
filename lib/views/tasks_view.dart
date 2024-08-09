@@ -23,6 +23,7 @@ class TasksView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 14),
               child: CalendarTimeline(
+                fontSize: 28,
                 initialDate: DateTime.now(),
                 firstDate: DateTime.now().subtract(const Duration(days: 365)),
                 lastDate: DateTime.now().add(const Duration(days: 365)),

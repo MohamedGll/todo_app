@@ -75,6 +75,14 @@ class TaskItem extends StatelessWidget {
                     color: AppColors.primary,
                   ),
                 ),
+                Text(
+                  'Description',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    color: AppColors.grey,
+                  ),
+                ),
                 const SizedBox(
                   height: 8,
                 ),
