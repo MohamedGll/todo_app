@@ -16,8 +16,8 @@ class SettingsView extends StatelessWidget {
     'light'.tr(),
     'dark'.tr(),
   ];
-  String selectedLang = 'English';
-  String selectedMode = 'Light';
+  String selectedLang = 'english'.tr();
+  String selectedMode = 'light'.tr();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  selectedLang.tr(),
+                  selectedLang,
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,
@@ -152,7 +152,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 isExpanded: true,
                 hint: Text(
-                  selectedMode.tr(),
+                  selectedMode,
                   style: TextStyle(
                     fontSize: 18,
                     color: AppColors.primary,

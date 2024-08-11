@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/widgets/custom_text_form_field.dart';
 
@@ -14,6 +16,8 @@ class AddTaskBottomSheet extends StatefulWidget {
 
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   DateTime selectedDate = DateTime.now();
+  var titleController = TextEditingController();
+  var subTitleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +46,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             height: 18,
           ),
           CustomTextFormField(
+            controller: titleController,
             style: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? Colors.white
                   : Colors.black,
             ),
-            hintText: 'title'.tr(),
+            hintText: 'title',
             hintStyle: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? AppColors.grey
@@ -58,12 +63,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             height: 18,
           ),
           CustomTextFormField(
+            controller: subTitleController,
             style: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? Colors.white
                   : Colors.black,
             ),
-            hintText: 'desc'.tr(),
+            hintText: 'desc',
             hintStyle: TextStyle(
               color: themeProvider.appTheme == ThemeMode.dark
                   ? AppColors.grey
@@ -105,7 +111,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
             ),
-            onPressed: () {},
+            onPressed: () {
+              TaskModel task = TaskModel(
+                title: titleController.text,
+                subTitle: subTitleController.text,
+                date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch,
+              );
+              FirebaseFunctions.addTask(task);
+              Navigator.pop(context);
+            },
             child: Text(
               'add'.tr(),
               style: const TextStyle(

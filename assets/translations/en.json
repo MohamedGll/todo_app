@@ -14,5 +14,7 @@
     "light":"Light",
     "dark":"Dark",
     "edit_task":"Edit Task",
-    "save_changes":"Save Changes"
+    "save_changes":"Save Changes",
+    "delete" :"Delete",
+    "edit":"Edit"
 }
