@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/providers/theme_provider.dart';
+import 'package:todo_app/views/Auth/login_view.dart';
+import 'package:todo_app/views/Auth/register_view.dart';
 import 'package:todo_app/views/edit_view.dart';
 import 'package:todo_app/views/home_view.dart';
 import 'package:todo_app/views/splash_view.dart';
@@ -17,7 +18,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseFirestore.instance.disableNetwork();
+  // await FirebaseFirestore.instance.disableNetwork();
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
@@ -47,11 +48,13 @@ class TodoApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashView.id,
+      initialRoute: LoginView.id,
       routes: {
         HomeView.id: (context) => const HomeView(),
         SplashView.id: (context) => const SplashView(),
         EditView.id: (context) => const EditView(),
+        LoginView.id: (context) => LoginView(),
+        RegisterView.id: (context) => RegisterView(),
       },
     );
   }
