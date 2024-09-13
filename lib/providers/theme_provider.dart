@@ -10,4 +10,17 @@ class ThemeProvider extends ChangeNotifier {
     await prefs.setBool('isDark', appTheme == ThemeMode.dark);
     notifyListeners();
   }
+
+  getTheme() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isDark = prefs.getBool('isDark');
+    if (isDark != null) {
+      if (isDark) {
+        appTheme = ThemeMode.dark;
+      } else {
+        appTheme = ThemeMode.light;
+      }
+      notifyListeners();
+    }
+  }
 }

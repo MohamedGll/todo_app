@@ -49,6 +49,12 @@ class FirebaseFunctions {
         .snapshots();
   }
 
+  static Future<UserModel?> getUserData(String userId) async {
+    var collection = getUsersCollection();
+    DocumentSnapshot<UserModel> docUser = await collection.doc(userId).get();
+    return docUser.data();
+  }
+
   static Future<void> deleteTask(String id) {
     return getTasksCollection().doc(id).delete();
   }
@@ -94,9 +100,10 @@ class FirebaseFunctions {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      if (credential.user?.emailVerified == true) {
-        onSuccess();
-      }
+      // if (credential.user?.emailVerified == true) {
+      //   onSuccess();
+      // }
+      onSuccess();
     } on FirebaseAuthException catch (e) {
       onError(e.message);
     }

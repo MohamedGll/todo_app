@@ -24,6 +24,7 @@ class LoginView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              style: TextStyle(color: Colors.red),
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -33,6 +34,7 @@ class LoginView extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             TextFormField(
+              style: TextStyle(color: Colors.red),
               controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(

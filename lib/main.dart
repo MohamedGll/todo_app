@@ -2,9 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/my_theme_data.dart';
+import 'package:todo_app/providers/auth_provider.dart';
 import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/views/Auth/login_view.dart';
 import 'package:todo_app/views/Auth/register_view.dart';
@@ -20,8 +20,11 @@ void main() async {
   );
   // await FirebaseFirestore.instance.disableNetwork();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
       child: EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
         path: 'assets/translations',
@@ -39,7 +42,9 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     themeProvider = Provider.of<ThemeProvider>(context);
-    getTheme();
+    var authProvider = Provider.of<AuthProvider>(context);
+
+    themeProvider.getTheme();
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -48,7 +53,8 @@ class TodoApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.id,
+      initialRoute:
+          authProvider.firebaseUser != null ? HomeView.id : LoginView.id,
       routes: {
         HomeView.id: (context) => const HomeView(),
         SplashView.id: (context) => const SplashView(),
@@ -57,18 +63,5 @@ class TodoApp extends StatelessWidget {
         RegisterView.id: (context) => RegisterView(),
       },
     );
-  }
-
-  getTheme() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isDark = prefs.getBool('isDark');
-    if (isDark != null) {
-      if (isDark) {
-        themeProvider.appTheme = ThemeMode.dark;
-      } else {
-        themeProvider.appTheme = ThemeMode.light;
-      }
-      themeProvider.notifyListeners();
-    }
   }
 }
