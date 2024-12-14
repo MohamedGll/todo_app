@@ -14,10 +14,12 @@ import 'package:todo_app/views/splash_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   // await FirebaseFirestore.instance.disableNetwork();
   runApp(
     MultiProvider(

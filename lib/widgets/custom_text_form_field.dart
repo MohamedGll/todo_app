@@ -7,15 +7,21 @@ class CustomTextFormField extends StatelessWidget {
       required this.hintStyle,
       required this.hintText,
       required this.style,
-      this.controller});
+      this.controller,
+      this.initialValue,
+      this.onChanged});
   final TextStyle hintStyle;
   final String hintText;
   final TextStyle style;
   final TextEditingController? controller;
+  final String? initialValue;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
+      initialValue: initialValue,
       controller: controller,
       style: style,
       cursorColor: AppColors.primary,

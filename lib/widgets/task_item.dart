@@ -35,6 +35,7 @@ class TaskItem extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 EditView.id,
+                arguments: task,
               );
             },
             backgroundColor: const Color(0xFF21B7CA),
@@ -102,16 +103,16 @@ class TaskItem extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Text(
-                  '10:30 AM',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: themeProvider.appTheme == ThemeMode.dark
-                        ? Colors.white
-                        : Colors.black,
-                  ),
-                ),
+                // Text(
+                //   '10:30 AM',
+                //   style: TextStyle(
+                //     fontSize: 14,
+                //     fontWeight: FontWeight.w400,
+                //     color: themeProvider.appTheme == ThemeMode.dark
+                //         ? Colors.white
+                //         : Colors.black,
+                //   ),
+                // ),
               ],
             ),
             const Spacer(

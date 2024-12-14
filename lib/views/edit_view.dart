@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app_colors.dart';
+import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/providers/theme_provider.dart';
 import 'package:todo_app/widgets/custom_text_form_field.dart';
 
@@ -18,6 +20,7 @@ class _EditViewState extends State<EditView> {
 
   @override
   Widget build(BuildContext context) {
+    var task = ModalRoute.of(context)?.settings.arguments as TaskModel;
     var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -77,6 +80,10 @@ class _EditViewState extends State<EditView> {
                           height: 50,
                         ),
                         CustomTextFormField(
+                          initialValue: task.title,
+                          onChanged: (value) {
+                            task.title = value;
+                          },
                           style: TextStyle(
                             color: themeProvider.appTheme == ThemeMode.dark
                                 ? Colors.white
@@ -93,6 +100,10 @@ class _EditViewState extends State<EditView> {
                           height: 32,
                         ),
                         CustomTextFormField(
+                          initialValue: task.subTitle,
+                          onChanged: (value) {
+                            task.subTitle = value;
+                          },
                           style: TextStyle(
                             color: themeProvider.appTheme == ThemeMode.dark
                                 ? Colors.white
@@ -123,11 +134,21 @@ class _EditViewState extends State<EditView> {
                           height: 18,
                         ),
                         InkWell(
-                          onTap: () {
-                            selectDateFun();
+                          onTap: () async {
+                            DateTime? newDate = await selectDateFun();
+                            if (newDate != null) {
+                              task.date = newDate.millisecondsSinceEpoch;
+                              setState(() {});
+                            }
                           },
                           child: Text(
-                            selectedDate.toString().substring(0, 10),
+                            DateFormat.yMd().format(
+                              DateUtils.dateOnly(
+                                DateTime.fromMillisecondsSinceEpoch(
+                                  task.date,
+                                ),
+                              ),
+                            ),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppColors.primary,
@@ -149,7 +170,10 @@ class _EditViewState extends State<EditView> {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await FirebaseFunctions.updateTask(task);
+                              Navigator.pop(context);
+                            },
                             child: Text(
                               'save_changes'.tr(),
                               style: const TextStyle(
@@ -193,5 +217,6 @@ class _EditViewState extends State<EditView> {
       selectedDate = chosenDate;
       setState(() {});
     }
+    return chosenDate;
   }
 }
