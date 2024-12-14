@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/firebase_functions.dart';
-import 'package:todo_app/views/Auth/login_view.dart';
+import 'package:todo_app/views/Auth/login/login_view.dart';
 
 class RegisterView extends StatelessWidget {
   RegisterView({super.key});

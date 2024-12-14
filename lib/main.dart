@@ -6,7 +6,7 @@ import 'package:todo_app/firebase_options.dart';
 import 'package:todo_app/my_theme_data.dart';
 import 'package:todo_app/providers/auth_provider.dart';
 import 'package:todo_app/providers/theme_provider.dart';
-import 'package:todo_app/views/Auth/login_view.dart';
+import 'package:todo_app/views/Auth/login/login_view.dart';
 import 'package:todo_app/views/Auth/register_view.dart';
 import 'package:todo_app/views/edit_view.dart';
 import 'package:todo_app/views/home_view.dart';

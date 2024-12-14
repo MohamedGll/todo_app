@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/firebase_functions.dart';
+import 'package:todo_app/base.dart';
+import 'package:todo_app/views/Auth/login/login_connector.dart';
+import 'package:todo_app/views/Auth/login/login_view_model.dart';
 import 'package:todo_app/views/Auth/register_view.dart';
 import 'package:todo_app/views/home_view.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
   static const String id = 'LoginView';
 
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends BaseView<LoginViewModel, LoginView>
+    implements LoginConnector {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.connector = this;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +39,7 @@ class LoginView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
@@ -34,7 +49,7 @@ class LoginView extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             TextFormField(
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
               controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(
@@ -45,33 +60,10 @@ class LoginView extends StatelessWidget {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                FirebaseFunctions.login(
-                    emailController.text, passwordController.text,
-                    onSuccess: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    HomeView.id,
-                    (route) => false,
-                  );
-                }, onError: (message) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: const Text(
-                          'Error',
-                        ),
-                        content: Text(message),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                });
+                viewModel.login(
+                  emailController.text,
+                  passwordController.text,
+                );
               },
               child: const Text('Login'),
             ),
@@ -112,4 +104,56 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  LoginViewModel initMyViewModel() {
+    return LoginViewModel();
+  }
+
+  @override
+  Future<void> goToHome() async {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      HomeView.id,
+      (route) => false,
+    );
+  }
+
+  // @override
+  // void hideLoading() {
+  //   Navigator.pop(context);
+  // }
+
+  // @override
+  // void showErrorDialog(String message) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: const Text(
+  //           'Error',
+  //         ),
+  //         content: Text(message),
+  //         actions: [
+  //           ElevatedButton(
+  //             onPressed: () {},
+  //             child: const Text('Ok'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  // @override
+  // void showLoading() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return const AlertDialog(
+  //         title: Center(child: CircularProgressIndicator()),
+  //       );
+  //     },
+  //   );
+  // }
 }
